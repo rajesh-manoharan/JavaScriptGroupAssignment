@@ -2,10 +2,67 @@ import { resumeItem } from "../model/resume-item.js";
 
 class JobItemView {
 
-    constructor(item) {
-        this.item = item;
-        this.object = document.getElementById(this.item);
+    constructor() {
+        this.itemNumber = 0;
     }
+
+    displayResumeDetails(allJobItems) {
+
+        this.parentObject = document.getElementById("personal");
+        this.object = document.createElement("div");
+        this.object.setAttribute("id", "personalSection");
+        this.parentObject.appendChild(this.object);
+        this.buildResume(allJobItems[this.itemNumber]["personal"]);
+
+        this.parentObject = document.getElementById("education");
+        this.object = document.createElement("div");
+        this.object.setAttribute("id", "educationSection");
+        this.parentObject.appendChild(this.object);
+        this.buildResume(allJobItems[this.itemNumber]["education"]);
+
+        this.parentObject = document.getElementById("work");
+        this.object = document.createElement("div");
+        this.object.setAttribute("id", "workSection");
+        this.parentObject.appendChild(this.object);
+        this.buildResume(allJobItems[this.itemNumber]["work"]);
+
+        this.parentObject = document.getElementById("projects");
+        this.object = document.createElement("div");
+        this.object.setAttribute("id", "projectsSection");
+        this.parentObject.appendChild(this.object);
+        this.buildResume(allJobItems[this.itemNumber]["projects"]);
+
+        this.parentObject = document.getElementById("Internship");
+        this.object = document.createElement("div");
+        this.object.setAttribute("id", "InternshipSection");
+        this.parentObject.appendChild(this.object);
+        this.buildResume(allJobItems[this.itemNumber]["internship"]);
+
+        this.parentObject = document.getElementById("achievements");
+        this.object = document.createElement("div");
+        this.object.setAttribute("id", "achievementsSection");
+        this.parentObject.appendChild(this.object);
+        this.buildResume(allJobItems[this.itemNumber]["achievements"]);
+
+        this.parentObject = document.getElementById("basics");
+        this.object = document.createElement("div");
+        this.object.setAttribute("id", "basicsSection");
+        this.parentObject.appendChild(this.object);
+        this.buildResume(allJobItems[this.itemNumber]["basics"]);
+
+        this.parentObject = document.getElementById("skills");
+        this.object = document.createElement("div");
+        this.object.setAttribute("id", "skillsSection");
+        this.parentObject.appendChild(this.object);
+        this.buildResume(allJobItems[this.itemNumber]["skills"]);
+
+        this.parentObject = document.getElementById("interests");
+        this.object = document.createElement("div");
+        this.object.setAttribute("id", "interestsSection");
+        this.parentObject.appendChild(this.object);
+        this.buildResume(allJobItems[this.itemNumber]["interests"]);
+    }
+
     buildResume(jsonObj) {
         for (let jsonLoop in jsonObj) {
             if (!!jsonObj[jsonLoop] && typeof (jsonObj[jsonLoop]) == "object") {
@@ -23,6 +80,51 @@ class JobItemView {
             }
         }
     }
+
+    displayPrevButton(prevBtn, totalCount) {
+        prevBtn.disabled = true;
+        if (this.itemNumber > 0 && this.itemNumber <= (totalCount - 1)) {
+            prevBtn.disabled = false;
+        }
+    }
+
+    displayNextButton(nextBtn, totalCount) {
+        nextBtn.disabled = true
+        if (this.itemNumber >= 0 && this.itemNumber < (totalCount - 1)) {
+            nextBtn.disabled = false;
+        }
+    }
+
+    resetResume() {
+        if (document.getElementById('personalSection')) {
+            document.getElementById("personalSection").remove();
+            document.getElementById("educationSection").remove();
+            document.getElementById("workSection").remove();
+            document.getElementById("projectsSection").remove();
+            document.getElementById("InternshipSection").remove();
+            document.getElementById("achievementsSection").remove();
+            document.getElementById("basicsSection").remove();
+            document.getElementById("skillsSection").remove();
+            document.getElementById("interestsSection").remove();
+        }
+        console.log('Reset button function', this.itemNumber);
+    }
+
+    resetResumeCounter() {
+        this.itemNumber = 0;
+    }
+
+
+    clickPrevButton() {
+        this.itemNumber--;
+        console.log('Prev button function', this.itemNumber);
+    };
+
+    clickNextButton() {
+        this.itemNumber++;
+        console.log('Next button function', this.itemNumber);
+    }
+
 }
 
 export { JobItemView };
