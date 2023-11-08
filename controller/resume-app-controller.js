@@ -3,6 +3,7 @@ class ResumeAppController {
 
     init() {
         const resumeAppView = new ResumeAppView();
+        resumeAppView.displayAllResume();
         resumeAppView.displaySearchResume();
     }
 

@@ -107,7 +107,6 @@ class JobItemView {
             document.getElementById("skillsSection").remove();
             document.getElementById("interestsSection").remove();
         }
-        console.log('Reset button function', this.itemNumber);
     }
 
     resetResumeCounter() {
